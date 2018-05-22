@@ -1,6 +1,6 @@
 package com.idolice.repository;
 
-import com.idolice.Model.User;
+import com.idolice.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

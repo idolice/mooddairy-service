@@ -1,7 +1,7 @@
 package com.idolice.service;
 
-import com.idolice.Model.Mood;
-import com.idolice.Model.User;
+import com.idolice.entity.Mood;
+import com.idolice.entity.User;
 import com.idolice.domain.MoodTag;
 import com.idolice.domain.request.WxUserMoodInfoVO;
 import com.idolice.repository.MoodRepository;

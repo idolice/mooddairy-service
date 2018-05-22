@@ -1,4 +1,4 @@
-package com.idolice.Model;
+package com.idolice.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
