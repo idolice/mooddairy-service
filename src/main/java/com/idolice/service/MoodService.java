@@ -19,9 +19,7 @@ public class MoodService {
     @Autowired
     private MoodRepository moodRepository;
 
-    public List<MoodIndex> getMoodForMonth(String openId) {
-        LocalDate localDate = LocalDate.now();
-        int month = localDate.getMonthValue();
+    public List<MoodIndex> getMoodForMonth(int month, String openId) {
         List<Mood> moods = moodRepository.findByMonthAndOpenId(month, openId);
         logger.info("moods size: {}", moods.size());
         return mapToMoodIndex(moods);
