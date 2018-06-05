@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+    driveClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        implicitStrategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physicalStrategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
+      hbm2ddl:
+        auto: create
