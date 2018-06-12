@@ -11,4 +11,5 @@ public interface MoodRepository extends PagingAndSortingRepository<Mood, Integer
     List<Mood> findByOpenId(String openId);
     List<Mood> findByYearAndMonthAndDay(int year, int month, int day);
     List<Mood> findByMonthAndOpenId(int month, String openId);
+    List<Mood> findByYearAndMonthAndDayAndOpenId(int year, int month, int day, String openId);
 }

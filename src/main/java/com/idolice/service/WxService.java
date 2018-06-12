@@ -49,9 +49,22 @@ public class WxService {
         try {
             LocalDate localDate = LocalDate.now();
             Mood mood = new Mood();
-            mood.setYear(localDate.getYear());
-            mood.setDay(localDate.getDayOfMonth());
-            mood.setMonth(localDate.getMonthValue());
+            if(wxUserMoodInfoVO.getYear() == 0){
+                mood.setYear(localDate.getYear());
+            }else {
+                mood.setYear(wxUserMoodInfoVO.getYear());
+            }
+            if(wxUserMoodInfoVO.getMonth() == 0){
+                mood.setMonth(localDate.getMonthValue());
+            } else {
+                mood.setMonth(wxUserMoodInfoVO.getMonth());
+            }
+
+            if(wxUserMoodInfoVO.getDay() == 0) {
+                mood.setDay(localDate.getDayOfMonth());
+            } else {
+                mood.setDay(wxUserMoodInfoVO.getDay());
+            }
             if (userRepository.findByOpenId(wxUserMoodInfoVO.getOpenId()) == null) {
                 User user = new User();
                 user.setOpenId(wxUserMoodInfoVO.getOpenId());
@@ -60,7 +73,7 @@ public class WxService {
                 user.setProvince(wxUserMoodInfoVO.getUserInfo().getProvince());
                 userRepository.save(user);
             }
-            List<Mood> moods = moodRepository.findByYearAndMonthAndDay(localDate.getYear(),localDate.getMonthValue(), localDate.getDayOfMonth());
+            List<Mood> moods = moodRepository.findByYearAndMonthAndDay(mood.getYear(),mood.getMonth(), mood.getDay());
             if (moods.size() != 0) {
                 Mood moodExisted = moods.get(0);
                 moodExisted.setOpenId(wxUserMoodInfoVO.getOpenId());

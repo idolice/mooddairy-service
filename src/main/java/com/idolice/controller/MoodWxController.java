@@ -2,6 +2,7 @@ package com.idolice.controller;
 
 import com.idolice.Model.MoodIndex;
 import com.idolice.domain.request.WxUserMoodInfoVO;
+import com.idolice.domain.response.RecordResponseDTO;
 import com.idolice.service.MoodService;
 import com.idolice.service.WxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -17,9 +19,10 @@ public class MoodWxController {
     WxService wxService;
     @Autowired
     MoodService moodService;
+
     @RequestMapping(value = "/openId")
     public ResponseEntity<String> getOpenId(@RequestParam String jsCode) {
-       return wxService.getOpenId(jsCode);
+        return wxService.getOpenId(jsCode);
     }
 
     @RequestMapping(value = "/userMood", method = RequestMethod.POST)
@@ -34,7 +37,11 @@ public class MoodWxController {
         return responseEntity;
     }
 
-
+    @RequestMapping(value = "/{openId}/record", method = RequestMethod.GET)
+    public RecordResponseDTO getRecordOfSpecificDay(@PathVariable String openId, @PathParam("year") int year,
+                                                    @PathParam("month") int month, @PathParam("day") int day) {
+        return moodService.getMoodRecordForADay(year, month, day, openId);
+    }
 
 
 }
