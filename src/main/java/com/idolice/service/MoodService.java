@@ -31,8 +31,8 @@ public class MoodService {
         return recordResponseDTO;
     }
 
-    public List<MoodIndex> getMoodForMonth(int month, String openId) {
-        List<Mood> moods = moodRepository.findByMonthAndOpenId(month, openId);
+    public List<MoodIndex> getMoodForMonth(int year, int month, String openId) {
+        List<Mood> moods = moodRepository.findByMonthAndYearAndOpenId(month, year, openId);
         logger.info("moods size: {}", moods.size());
         return mapToMoodIndex(moods);
     }
