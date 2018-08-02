@@ -30,7 +30,7 @@ public class MoodWxController {
         return wxService.saveUserMood(wxUserMoodInfoVO);
     }
 
-    @RequestMapping(value = "/mood/{year}/{month}/{openId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{year}/{month}/{openId}", method = RequestMethod.GET)
     public ResponseEntity<List<MoodIndex>> getMoodOfMonth(@PathVariable int year, @PathVariable int month, @PathVariable String openId) {
         ResponseEntity<List<MoodIndex>> responseEntity =
                 new ResponseEntity<>(moodService.getMoodForMonth(year, month, openId), HttpStatus.ACCEPTED);
