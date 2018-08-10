@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/moodDiary
+    url: jdbc:mysql://123.206.57.248:3306/moodDiary
     username: root
     password: idolice
     driveClassName: com.mysql.jdbc.Driver

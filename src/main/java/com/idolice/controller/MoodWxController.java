@@ -3,6 +3,7 @@ package com.idolice.controller;
 import com.idolice.Model.MoodIndex;
 import com.idolice.domain.request.WxUserMoodInfoVO;
 import com.idolice.domain.response.RecordResponseDTO;
+import com.idolice.domain.response.ReportDTO;
 import com.idolice.service.MoodService;
 import com.idolice.service.WxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class MoodWxController {
     public RecordResponseDTO getRecordOfSpecificDay(@PathVariable String openId, @PathParam("year") int year,
                                                     @PathParam("month") int month, @PathParam("day") int day) {
         return moodService.getMoodRecordForADay(year, month, day, openId);
+    }
+
+    @RequestMapping(value = "/report/{year}", method = RequestMethod.GET)
+    public ReportDTO getReport(@PathVariable int year) {
+        return moodService.getYearReport(year);
     }
 
 
