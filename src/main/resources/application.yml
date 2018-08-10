@@ -1,10 +1,10 @@
 server:
   port: 8080
   ssl:
-    key-store: classpath:keystore.jks
-    key-store-password: 686869
+    key-store: classpath:idolice.cn.jks
+    key-store-password: idolice
     key-store-type: JKS
-    key-alias: tomcatssl
+    key-alias: idolice.cn
 
 spring:
   datasource:
