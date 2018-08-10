@@ -6,6 +6,8 @@ import com.idolice.domain.MoodTag;
 import com.idolice.domain.request.WxUserMoodInfoVO;
 import com.idolice.repository.MoodRepository;
 import com.idolice.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.List;
 @Service
 public class WxService {
     private final static String WX_URL = "https://api.weixin.qq.com/sns/jscode2session";
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -49,18 +52,18 @@ public class WxService {
         try {
             LocalDate localDate = LocalDate.now();
             Mood mood = new Mood();
-            if(wxUserMoodInfoVO.getYear() == 0){
+            if (wxUserMoodInfoVO.getYear() == 0) {
                 mood.setYear(localDate.getYear());
-            }else {
+            } else {
                 mood.setYear(wxUserMoodInfoVO.getYear());
             }
-            if(wxUserMoodInfoVO.getMonth() == 0){
+            if (wxUserMoodInfoVO.getMonth() == 0) {
                 mood.setMonth(localDate.getMonthValue());
             } else {
                 mood.setMonth(wxUserMoodInfoVO.getMonth());
             }
 
-            if(wxUserMoodInfoVO.getDay() == 0) {
+            if (wxUserMoodInfoVO.getDay() == 0) {
                 mood.setDay(localDate.getDayOfMonth());
             } else {
                 mood.setDay(wxUserMoodInfoVO.getDay());
@@ -71,19 +74,22 @@ public class WxService {
                 user.setGender(wxUserMoodInfoVO.getUserInfo().getGender());
                 user.setNickName(wxUserMoodInfoVO.getUserInfo().getNickName());
                 user.setProvince(wxUserMoodInfoVO.getUserInfo().getProvince());
+                logger.info("insert user to db: " + user);
                 userRepository.save(user);
             }
-            List<Mood> moods = moodRepository.findByYearAndMonthAndDay(mood.getYear(),mood.getMonth(), mood.getDay());
+            List<Mood> moods = moodRepository.findByYearAndMonthAndDay(mood.getYear(), mood.getMonth(), mood.getDay());
             if (moods.size() != 0) {
                 Mood moodExisted = moods.get(0);
                 moodExisted.setOpenId(wxUserMoodInfoVO.getOpenId());
                 moodExisted.setMoodTag(MoodTag.getIndex(wxUserMoodInfoVO.getMood()));
                 moodExisted.setReason(wxUserMoodInfoVO.getReason());
+                logger.info("insert mood to db: " + moodExisted);
                 moodRepository.save(moodExisted);
             } else {
                 mood.setOpenId(wxUserMoodInfoVO.getOpenId());
                 mood.setMoodTag(MoodTag.getIndex(wxUserMoodInfoVO.getMood()));
                 mood.setReason(wxUserMoodInfoVO.getReason());
+                logger.info("insert user to db: " + mood);
                 moodRepository.save(mood);
 
             }
