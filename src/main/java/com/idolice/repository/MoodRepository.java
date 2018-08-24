@@ -9,8 +9,9 @@ import java.util.List;
 @Repository
 public interface MoodRepository extends PagingAndSortingRepository<Mood, Integer> {
     List<Mood> findByOpenId(String openId);
-    List<Mood> findByYearAndMonthAndDay(int year, int month, int day);
     List<Mood> findByMonthAndYearAndOpenId(int month, int year, String openId);
+    List<Mood> findByMonthAndYearAndOpenIdOrderByDayDesc(int month, int year, String openId);
     List<Mood> findByYearAndMonthAndDayAndOpenId(int year, int month, int day, String openId);
-    List<Mood> findByYear(int year);
+    List<Mood> findByYearAndOpenId(int year, String openId);
+
 }

@@ -77,7 +77,7 @@ public class WxService {
                 logger.info("insert user to db: " + user);
                 userRepository.save(user);
             }
-            List<Mood> moods = moodRepository.findByYearAndMonthAndDay(mood.getYear(), mood.getMonth(), mood.getDay());
+            List<Mood> moods = moodRepository.findByYearAndMonthAndDayAndOpenId(mood.getYear(), mood.getMonth(), mood.getDay(), wxUserMoodInfoVO.getOpenId());
             if (moods.size() != 0) {
                 Mood moodExisted = moods.get(0);
                 moodExisted.setOpenId(wxUserMoodInfoVO.getOpenId());

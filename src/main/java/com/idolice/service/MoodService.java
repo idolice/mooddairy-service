@@ -42,8 +42,8 @@ public class MoodService {
         return mapToMoodIndex(moods);
     }
 
-    public ReportDTO getYearReport(int year) {
-        List<Mood> moods = moodRepository.findByYear(year);
+    public ReportDTO getYearReport(int year, String openId) {
+        List<Mood> moods = moodRepository.findByYearAndOpenId(year, openId);
         List<MoodMatrix> moodMatrices = buildOriginalMatrix();
         moodMatrices = moodMatrices.stream().map(item -> {
             for (Mood mood : moods) {

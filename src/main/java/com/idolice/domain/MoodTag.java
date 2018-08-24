@@ -21,7 +21,7 @@ public enum  MoodTag {
         return name;
     }
     public String getPieTag() {return pieTag;}
-    private int getIndex() {return index;}
+    public int getIndex() {return index;}
     public static Integer getIndex(String name) {
         for (MoodTag c : MoodTag.values()) {
             if (c.getName().equalsIgnoreCase(name)) {
