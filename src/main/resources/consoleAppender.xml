@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+        <layout class="com.idolice.controller.MaskLayot">
+            <patternProperty>
+                (.*)(&lt;dateOfBirth&gt;)(.*?)(&lt;/dateOfBirth&gt;)(.*) | ...etc(many similar patterns)
+            </patternProperty>
+            <pattern>
+                ${consoleLogPattern}
+            </pattern>
+        </layout>
+
+    </encoder>
+</appender>
+</included>

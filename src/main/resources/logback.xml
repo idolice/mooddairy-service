@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="default.xml"/>
+    <include resource="fileAppender.xml"/>
+    <include resource="consoleAppender.xml"/>
+    <logger name="com.idolice" level="'INFO"/>
+    <logger name="com.idolice" level="'DEBUG"/>
+    <root level="info">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

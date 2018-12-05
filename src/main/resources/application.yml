@@ -20,3 +20,8 @@ spring:
         implicitStrategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physicalStrategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
+  redis:
+    database: 2
+    host: localhost
+    port: 6379
+    password: idolice

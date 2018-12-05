@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>
+        ${logPath}/${logFile}.log
+    </file>
+    <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>
+            ${logPath}/${logFile}-%d.log.gz
+        </fileNamePattern>
+        <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+        <layout class="com.idolice.controller.MaskLayot">
+            <patternProperty>
+                (.*)(&lt;dateOfBirth&gt;)(.*?)(&lt;/dateOfBirth&gt;)(.*) | ...etc(many similar patterns)
+            </patternProperty>
+            <pattern>
+                ${fileLogPattern}
+            </pattern>
+        </layout>
+
+    </encoder>
+</appender>
+<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>500</queueSize>
+    <discardingThreshold>0</discardingThreshold>
+    <appender-ref ref="file"/>
+</appender>
+</included>
